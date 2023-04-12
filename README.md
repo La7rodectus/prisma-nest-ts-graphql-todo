@@ -1,1 +1,1 @@
-# prisma-nest-ts-graphql-todo
+some project to check out techs
