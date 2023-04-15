@@ -5,6 +5,7 @@ import { CreateNoteInput, UpdateNoteInput } from 'src/types/graphql';
 @Injectable()
 export class NoteService {
   private prisma: PrismaService = new PrismaService();
+
   create(createNoteInput: CreateNoteInput) {
     return this.prisma.note.create({
       data: createNoteInput

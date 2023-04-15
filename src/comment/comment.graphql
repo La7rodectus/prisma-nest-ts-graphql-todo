@@ -1,0 +1,28 @@
+type Comment {
+  id: Int!
+  text: String!
+
+  noteId: Int!
+}
+
+input CreateCommentInput {
+  text: String!
+
+  noteId: Int!
+}
+
+input UpdateCommentInput {
+  id: Int!
+  text: String!
+}
+
+type Query {
+  comments: [Comment]!
+  comment(id: Int!): Comment
+}
+
+type Mutation {
+  createComment(createCommentInput: CreateCommentInput!): Comment!
+  updateComment(updateCommentInput: UpdateCommentInput!): Comment!
+  removeComment(id: Int!): Comment
+}
