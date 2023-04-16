@@ -9,7 +9,6 @@ type Note {
 input CreateNoteInput {
   name: String!
   description: String!
-  comments_list_id: Int!
 }
 
 input UpdateNoteInput {
