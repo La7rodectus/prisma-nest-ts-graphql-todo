@@ -14,7 +14,7 @@ import { CommentModule } from './comment/comment.module';
       driver: ApolloDriver,
       playground: false,
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
-      typePaths: ['./**/*.graphql'],
+      typePaths: ['defaults.graphql', './**/*.graphql'],
       definitions: {
         path: join(process.cwd(), 'src/types/graphql.ts'),
         outputAs: 'class'

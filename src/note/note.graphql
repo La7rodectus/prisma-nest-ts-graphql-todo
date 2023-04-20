@@ -17,9 +17,11 @@ input UpdateNoteInput {
   description: String!
 }
 
+union GetNoteByIdResult = Note | NotFoundError
+
 type Query {
-  notes: [Note]!
-  note(id: Int!): Note
+  notes: [Note]
+  note(id: Int!): GetNoteByIdResult!
 }
 
 type Mutation {

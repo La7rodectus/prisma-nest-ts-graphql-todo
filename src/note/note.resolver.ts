@@ -17,8 +17,20 @@ export class NoteResolver {
   }
 
   @Query('note')
-  findOne(@Args('id') id: number) {
-    return this.noteService.findOne(id);
+  async findOne(@Args('id') id: number) {
+    const note = await this.noteService.findOne(id);
+    console.log(typeof note);
+
+    if (!note) {
+      return {
+        __typename: 'NotFoundError',
+        message: 'Note not found!'
+      };
+    }
+    return {
+      __typename: 'Note',
+      ...note
+    };
   }
 
   @Mutation('updateNote')

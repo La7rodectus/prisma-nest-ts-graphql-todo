@@ -1,0 +1,7 @@
+interface BaseError {
+  message: String!
+}
+
+type NotFoundError implements BaseError {
+  message: String!
+}

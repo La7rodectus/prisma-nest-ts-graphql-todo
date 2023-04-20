@@ -11,9 +11,19 @@ export class CommentResolver {
     return this.commentService.create(createCommentInput);
   }
 
-  @Query('comment')
-  findAll() {
-    return this.commentService.findAll();
+  @Query('comments')
+  async findAll() {
+    const comment = await this.commentService.findAll();
+    if (!comment) {
+      return {
+        __typename: 'NotFoundError',
+        message: 'Comment not found'
+      };
+    }
+    return {
+      __typename: 'Comment',
+      ...comment
+    };
   }
 
   @Query('comment')

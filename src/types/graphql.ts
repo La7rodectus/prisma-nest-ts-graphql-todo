@@ -21,13 +21,16 @@ export class UpdateCommentInput {
 export class CreateNoteInput {
     name: string;
     description: string;
-    comments_list_id: number;
 }
 
 export class UpdateNoteInput {
     id: number;
     name: string;
     description: string;
+}
+
+export interface BaseError {
+    message: string;
 }
 
 export class Comment {
@@ -37,13 +40,13 @@ export class Comment {
 }
 
 export abstract class IQuery {
-    abstract comments(): Nullable<Comment>[] | Promise<Nullable<Comment>[]>;
+    abstract comments(): Nullable<Nullable<Comment>[]> | Promise<Nullable<Nullable<Comment>[]>>;
 
-    abstract comment(id: number): Nullable<Comment> | Promise<Nullable<Comment>>;
+    abstract comment(id: number): Nullable<GetCommentByIdResult> | Promise<Nullable<GetCommentByIdResult>>;
 
-    abstract notes(): Nullable<Note>[] | Promise<Nullable<Note>[]>;
+    abstract notes(): Nullable<Nullable<Note>[]> | Promise<Nullable<Nullable<Note>[]>>;
 
-    abstract note(id: number): Nullable<Note> | Promise<Nullable<Note>>;
+    abstract note(id: number): GetNoteByIdResult | Promise<GetNoteByIdResult>;
 }
 
 export abstract class IMutation {
@@ -60,6 +63,10 @@ export abstract class IMutation {
     abstract removeNote(id: number): Nullable<Note> | Promise<Nullable<Note>>;
 }
 
+export class NotFoundError implements BaseError {
+    message: string;
+}
+
 export class Note {
     id: number;
     name: string;
@@ -67,4 +74,6 @@ export class Note {
     comments?: Nullable<Nullable<Comment>[]>;
 }
 
+export type GetCommentByIdResult = Comment | NotFoundError;
+export type GetNoteByIdResult = Note | NotFoundError;
 type Nullable<T> = T | null;

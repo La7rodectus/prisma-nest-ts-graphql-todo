@@ -16,9 +16,11 @@ input UpdateCommentInput {
   text: String!
 }
 
+union GetCommentByIdResult = Comment | NotFoundError
+
 type Query {
-  comments: [Comment]!
-  comment(id: Int!): Comment
+  comments: [Comment]
+  comment(id: Int!): GetCommentByIdResult
 }
 
 type Mutation {
