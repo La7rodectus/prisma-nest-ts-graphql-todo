@@ -1,7 +1,13 @@
+directive @hasRole(role: String) on FIELD | FIELD_DEFINITION
+
 interface BaseError {
   message: String!
 }
 
 type NotFoundError implements BaseError {
+  message: String!
+}
+
+type UnauthorizedError implements BaseError {
   message: String!
 }

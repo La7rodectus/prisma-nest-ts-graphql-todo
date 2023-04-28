@@ -19,7 +19,6 @@ export class NoteResolver {
   @Query('note')
   async findOne(@Args('id') id: number) {
     const note = await this.noteService.findOne(id);
-    console.log(typeof note);
 
     if (!note) {
       return {

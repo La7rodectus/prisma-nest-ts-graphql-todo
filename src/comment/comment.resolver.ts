@@ -13,7 +13,16 @@ export class CommentResolver {
 
   @Query('comments')
   async findAll() {
-    const comment = await this.commentService.findAll();
+    const comments = await this.commentService.findAll();
+    return {
+      __typename: 'Comment',
+      ...comments
+    };
+  }
+
+  @Query('comment')
+  async findOne(@Args('id') id: number) {
+    const comment = await this.commentService.findOne(id);
     if (!comment) {
       return {
         __typename: 'NotFoundError',
@@ -24,11 +33,6 @@ export class CommentResolver {
       __typename: 'Comment',
       ...comment
     };
-  }
-
-  @Query('comment')
-  findOne(@Args('id') id: number) {
-    return this.commentService.findOne(id);
   }
 
   @Mutation('updateComment')

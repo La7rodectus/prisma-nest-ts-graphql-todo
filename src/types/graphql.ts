@@ -46,7 +46,7 @@ export abstract class IQuery {
 
     abstract notes(): Nullable<Nullable<Note>[]> | Promise<Nullable<Nullable<Note>[]>>;
 
-    abstract note(id: number): GetNoteByIdResult | Promise<GetNoteByIdResult>;
+    abstract note(id: number): Nullable<GetNoteByIdResult> | Promise<Nullable<GetNoteByIdResult>>;
 }
 
 export abstract class IMutation {
@@ -67,13 +67,18 @@ export class NotFoundError implements BaseError {
     message: string;
 }
 
+export class UnauthorizedError implements BaseError {
+    message: string;
+}
+
 export class Note {
     id: number;
-    name: string;
+    name: name_String_NotNull_minLength_5;
     description: string;
     comments?: Nullable<Nullable<Comment>[]>;
 }
 
-export type GetCommentByIdResult = Comment | NotFoundError;
-export type GetNoteByIdResult = Note | NotFoundError;
+export type name_String_NotNull_minLength_5 = any;
+export type GetCommentByIdResult = Comment | UnauthorizedError | NotFoundError;
+export type GetNoteByIdResult = Note | UnauthorizedError | NotFoundError;
 type Nullable<T> = T | null;

@@ -1,6 +1,6 @@
 type Note {
   id: Int!
-  name: String!
+  name: String! @constraint(minLength: 5)
   description: String!
 
   comments: [Comment]
@@ -17,11 +17,11 @@ input UpdateNoteInput {
   description: String!
 }
 
-union GetNoteByIdResult = Note | NotFoundError
+union GetNoteByIdResult = Note | UnauthorizedError | NotFoundError
 
 type Query {
-  notes: [Note]
-  note(id: Int!): GetNoteByIdResult!
+  notes: [Note] @hasRole(role: "admin")
+  note(id: Int!): GetNoteByIdResult @hasRole(role: "admin")
 }
 
 type Mutation {

@@ -16,7 +16,7 @@ input UpdateCommentInput {
   text: String!
 }
 
-union GetCommentByIdResult = Comment | NotFoundError
+union GetCommentByIdResult = Comment | UnauthorizedError | NotFoundError
 
 type Query {
   comments: [Comment]
